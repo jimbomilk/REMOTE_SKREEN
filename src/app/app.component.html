@@ -1,0 +1,97 @@
+
+<div class="app">
+  <div class="header">
+    <div class="row" >
+      <div class="col-md-2">
+        <img class="img-responsive" style="padding-top: 20px" src="./assets/images/logo_modern_big_white.png"  alt="Addmeetoo logo">
+      </div>
+      <div class="col-md-8" >
+        <p class="form-title" >{{screeny?.headerMain}}</p>
+      </div>
+      <div class="col-md-2">
+        <img class="img-responsive header_right" src="{{screeny?.logo1}}" style="padding-top: 20px" height="20%" width="20%">
+      </div>
+    </div>
+  </div>
+
+  <div id="contenido">
+
+    <div id="fullscreen"  [ngStyle]= "{'background-image':'url(' + getBackImage() + ')'}">
+      <div class="row" style="width: 100%;height:10%;margin: 0px">
+        <div class="col-md-12"  >
+            <p  class="form-subtitle" >{{screeny?.headerSub}}</p>
+        </div>
+      </div>
+
+
+      <div *ngIf="showScreen" style="height: 90%">
+        <!-- Options -->
+        <div *ngIf="typeOptions" class="vertical-center">
+          <div class="row" style="width: 100%;margin: 0px">
+            <div *ngFor="let option of  getbody(screeny?.body); let even = even; let odd = odd"   class="col-lg-{{colClass}}">
+
+                <div id="option-widget" >
+                    <div class="options" >
+                        <img  class="media-object img-circle img-responsive" [ngClass]="{ odd: odd, even: even }" src="{{host + '/' + option?.image}}">
+                        <p [ngStyle]="{'font-size': textSize}">{{option.description}}</p>
+
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chart -->
+        <div *ngIf="typeChart" class="vertical-center">
+
+          <google-chart [data]="columnChartOptions" style="width: 100%"></google-chart>
+
+        </div>
+
+        <!-- Chart -->
+        <div *ngIf="typeRanking" class="vertical-center">
+
+          <ul class="ranking">
+            <li *ngFor="let usergame of  getbody(screeny?.body)">
+              <p>{{usergame.order}}. {{usergame.description}} {{usergame.result}}</p>
+            </li>
+          </ul>
+
+        </div>
+
+      </div>
+
+      <div *ngIf="showAds" class="adv">
+        <div class="row">
+          <div class="col-md-12">
+
+              <p class="adstext1">
+                  {{screeny?.stext}}
+              </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+              <p class="adstext2">
+                  {{screeny?.ltext}}
+              </p>
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </div>
+  </div>
+</div>
+
+<footer id="footer">
+  <div class = "qr">
+      <img class="img-responsive" src="./assets/images/qr.jpg" style="height: 80%;width: auto">
+      <div class="location">{{gameId}}</div>
+  </div>
+  <messages [pusher]="pusher"></messages>
+</footer>
+
+

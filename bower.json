@@ -1,0 +1,21 @@
+{
+  "name": "skreen",
+  "description": "addmeetoo screen",
+  "main": "main.ts",
+  "authors": [
+    "Jose Maria Garcia <jmgarciacarrasco@gmail.com>"
+  ],
+  "license": "ADDMEETOO",
+  "keywords": [
+    "screen"
+  ],
+  "homepage": "www.addmeetoo.com",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
