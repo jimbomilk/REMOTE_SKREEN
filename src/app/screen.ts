@@ -13,6 +13,7 @@ export class bodyElement{
 
 export class Screen {
     public id:number;
+    public code: string;
     public type: string;
     public gameboard_id: string;
     public logo1: string;

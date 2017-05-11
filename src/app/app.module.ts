@@ -1,5 +1,6 @@
-import { BrowserModule } from '@angular/platform-browser';
+
 import { NgModule,APP_INITIALIZER  } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
@@ -8,10 +9,8 @@ import { PageService }    from './services/page.service';
 import { AppConfig }       from './app.config';
 
 import { AuthenticationService } from './services/index';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MessagesComponent } from "./messages.component";
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
-
 
 export function initConfig(config: AppConfig){
   return () => config.load()
@@ -26,8 +25,7 @@ export function initConfig(config: AppConfig){
     BrowserModule,
     FormsModule,
     HttpModule,
-    NgbModule.forRoot(),
-    Ng2GoogleChartsModule,
+    Ng2GoogleChartsModule
    ],
   providers: [
     AppConfig,

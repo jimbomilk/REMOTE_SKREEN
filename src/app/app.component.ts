@@ -1,9 +1,8 @@
-import { Component, OnInit,AfterViewChecked ,ViewChild,ViewEncapsulation } from '@angular/core';
+import {Component, OnInit, AfterViewChecked, ViewChild, ViewEncapsulation, ElementRef} from '@angular/core';
 
 import { AppConfig } from './app.config';
 import { Screen } from './screen';
 import { MessagesComponent }  from './messages.component';
-
 
 declare var Pusher: any;
 
@@ -11,8 +10,7 @@ declare var Pusher: any;
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  encapsulation: ViewEncapsulation.None
-
+  encapsulation: ViewEncapsulation.None,
 })
 
 export class AppComponent implements OnInit, AfterViewChecked {
@@ -32,7 +30,9 @@ export class AppComponent implements OnInit, AfterViewChecked {
     public typeOptions : boolean = false;
     public typeChart : boolean = false;
     public typeRanking : boolean = false;
-    public host;
+    public qrcode: boolean = false ;
+    public weather : boolean = true;
+    //public host;
 
     public columnChartOptions:any =  {
       chartType: 'ColumnChart',
@@ -51,12 +51,12 @@ export class AppComponent implements OnInit, AfterViewChecked {
         title: 'Participation'}
     };
 
-    constructor(private config: AppConfig )
+    constructor(private config: AppConfig,private elementRef:ElementRef)
     {
         this.pusher = new Pusher('9931344a99d006ebf67d', {
           cluster: 'eu'
         });
-        this.host = this.config.getConfig('host_images');
+        //this.host = this.config.getConfig('host_images');
     }
 
     public getBackImage()
@@ -64,7 +64,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
       if(this.showAds)
         return this.screeny.logo2;
       else
-        return '../assets/images/'+this.screeny.logo2+'.jpg';
+        return './assets/images/'+this.screeny.logo2+'.jpg';
 
     }
 
@@ -84,6 +84,13 @@ export class AppComponent implements OnInit, AfterViewChecked {
       if (listItem) {
         listItem.scrollTop = listItem.scrollHeight;
       }
+
+      if (this.weather){
+        /*var s = document.createElement("script");
+        s.type = "text/javascript";
+        s.src = "https://www.tiempo.com/wid_loader/9cac11995ff674b308b4103845721c5b";
+        this.elementRef.nativeElement.appendChild(s);*/
+      }
     }
 
     private subscribeToChannel(location: string) {
@@ -92,8 +99,9 @@ export class AppComponent implements OnInit, AfterViewChecked {
           this.newScreen(data.screen);
         });
         this.channel2 = this.pusher.subscribe(location);
-        this.channel2.bind('App\\Events\\BigAdsEvent', (data) => {
-          this.newAds(data.screen);
+        this.channel2.bind('App\\Events\\AdsEvent', (data) => {
+          if (data.message.type =='bigpack')
+            this.newAds(data.message);
         });
         this.subscribed = true;
     }
@@ -102,8 +110,9 @@ export class AppComponent implements OnInit, AfterViewChecked {
         this.showScreen = false;
         this.showAds = true;
         this.screeny = screen;
-        let splited=this.screeny.image.split("/");
-        this.screeny.logo2= this.host + '/' + splited[0] + '/' + splited[1];
+        this.screeny.logo2= this.screeny.image;
+        this.weather = true;
+        this.qrcode = false;
     }
 
     private newScreen(screen: Screen) {
@@ -114,29 +123,31 @@ export class AppComponent implements OnInit, AfterViewChecked {
         this.typeOptions = false;
         this.typeChart = false;
         this.typeRanking = false;
+        this.weather = false;
+        this.qrcode = true;
 
         // Elementos comunes
-        this.screeny.logo1= this.host + '/' + this.screeny.logo1;
-        if (this.screeny.gameboard_id!='')
-          this.gameId = this.screeny.gameboard_id;
+        if (this.screeny.code!='')
+          this.gameId = this.screeny.code;
 
         // Vemos que tipo de pantalla es
         if (this.screeny.type == 'options') {
           this.typeOptions = true;
           if (this.screeny.body) {
             let options = JSON.parse(this.screeny.body);
-            this.textSize = 24/(options.length+1)
+            this.textSize = 4;
             if (this.textSize < 2)
               this.textSize = 2;
             this.textSize += 'em';
-            this.colClass = (options.length>6 || options.length==0)?"2":""+(12/options.length);
+            this.colClass = "6";
+            //this.colClass = (options.length>6 || options.length==0)?"4":""+(12/options.length);
           }
         }
         else if(this.screeny.type == 'chart'){
-          this.typeChart = false;
+          this.typeChart = true;
           let values = JSON.parse(this.screeny.body);
           this.columnChartOptions.dataTable = values.dataSeries.slice();
-          this.typeChart = true;
+          this.columnChartOptions.options.title = this.screeny.headerSub;
         }
         else if(this.screeny.type == 'ranking'){
           let values = JSON.parse(this.screeny.body);

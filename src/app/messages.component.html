@@ -1,10 +1,10 @@
 
 <div id="messages" class="container-fluid" style="margin: 0px;padding:0px">
   <div class="row" style="height: 100%">
-    <div class="col-12" style="padding: 0px">
+    <div class="col-12" style="height:100%;padding: 0px">
         <ul class="list-inline" style="height: 100%;width: 100%; margin:0px">
 
-          <li *ngFor="let message of messages" style="width: 25%;height: 100%; margin:0px;padding-right: 0px">
+          <li *ngFor="let message of messages" style="width: 22%;height: 100%; margin:0px;padding: 0;padding-right: 10px">
 
               <div class="profile-card text-center message_image" style="height: 100%" [ngStyle]="{'background-image': 'url(' + message?.image + ')'}">
                   <div class="profile-info">

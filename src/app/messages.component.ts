@@ -29,8 +29,9 @@ export class MessagesComponent implements OnInit {
     });
 
     this.channel2 = this.pusher.subscribe(location);
-    this.channel2.bind('App\\Events\\SmallAdsEvent', (data) => {
-      this.newMessage(data.message);
+    this.channel2.bind('App\\Events\\AdsEvent', (data) => {
+      if (data.message.type =='smallpack')
+        this.newMessage(data.message);
     });
 
     this.subscribed = true;
@@ -39,9 +40,6 @@ export class MessagesComponent implements OnInit {
   private newMessage(received: Screen) {
 
     let host = this.config.getConfig('host_images');
-    let splited=received.image.split("/");
-    received.image= host + '/' + splited[0] + '/' + splited[1];
-
 
     this.messages.push(received);
     if (this.messages.length>4)

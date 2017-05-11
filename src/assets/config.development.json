@@ -3,5 +3,6 @@
   "user": "jmgarciacarrasco@gmail.com",
   "pass": "secret",
   "location": "location1",
-  "screen": "4"
+  "screen": "4",
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json"
 }
