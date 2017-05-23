@@ -17,6 +17,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
 
     @ViewChild(MessagesComponent)
 
+    public screens: Screen[];
     public screeny : Screen;
     public gameId;
     private channel1;
@@ -62,10 +63,15 @@ export class AppComponent implements OnInit, AfterViewChecked {
 
     public getBackImage()
     {
-      if(this.showAds)
-        return this.screeny.logo2;
-      else
-        return './assets/images/'+this.screeny.logo2+'.jpg';
+      if(this.screeny){
+        if(this.showAds)
+          return this.screeny.logo2;
+        else
+          return './assets/images/'+this.screeny.logo2+'.jpg';
+      }
+      else{
+          return './assets/images/undefined.jpg';
+      }
 
     }
 
@@ -88,16 +94,18 @@ export class AppComponent implements OnInit, AfterViewChecked {
     }
 
     private subscribeToChannel(location: string) {
+      if (this.pusher) {
         this.channel1 = this.pusher.subscribe(location);
         this.channel1.bind('App\\Events\\ScreenEvent', (data) => {
           this.newScreen(data.screen);
         });
         this.channel2 = this.pusher.subscribe(location);
         this.channel2.bind('App\\Events\\AdsEvent', (data) => {
-          if (data.message.type =='bigpack')
+          if (data.message.type == 'bigpack')
             this.newAds(data.message);
         });
         this.subscribed = true;
+      }
     }
 
     private newAds(screen: Screen) {
