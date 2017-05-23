@@ -17,17 +17,18 @@
   <div id="contenido">
 
 
+
     <div id="fullscreen"  [ngStyle]= "{'background-image':'url(' + getBackImage() + ')'}">
-      <div class="row" style="width: 100%;height:10%;margin: 0px">
-        <div class="col-md-12"  >
+
+
+
+      <div *ngIf="showScreen" style="height: 100%">
+        <div class="row" style="width: 100%;height:10%;margin: 0px">
+          <div class="col-md-12"  >
             <p  class="form-subtitle" >{{screeny?.headerSub}}</p>
           </div>
 
-      </div>
-
-
-
-      <div *ngIf="showScreen" style="height: 90%">
+        </div>
         <!-- Options -->
         <div *ngIf="typeOptions" class="vertical-center">
           <div class="row" style="width: 100%;margin: 0px">
@@ -81,7 +82,8 @@
 
       </div>
 
-      <div *ngIf="showAds" class="adv">
+      <div *ngIf="showAds" class="adv" style="height: 100%">
+
         <div class="row">
           <div class="col-md-12">
 

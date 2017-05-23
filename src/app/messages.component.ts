@@ -38,9 +38,6 @@ export class MessagesComponent implements OnInit {
   }
 
   private newMessage(received: Screen) {
-
-    let host = this.config.getConfig('host_images');
-
     this.messages.push(received);
     if (this.messages.length>4)
     {

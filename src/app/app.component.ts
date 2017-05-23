@@ -32,13 +32,14 @@ export class AppComponent implements OnInit, AfterViewChecked {
     public typeRanking : boolean = false;
     public qrcode: boolean = false ;
     public weather : boolean = true;
+    public isVideo : boolean = false;
     //public host;
 
     public columnChartOptions:any =  {
       chartType: 'ColumnChart',
       dataTable: [
-        ['Year', 'Sales', 'Expenses'],
-        ['2004', 1000, 400],
+        ['', '', ''],
+        ['', 1000, 400],
       ],
       options: {
         width: '100%',
@@ -80,17 +81,10 @@ export class AppComponent implements OnInit, AfterViewChecked {
     }
 
     public ngAfterViewChecked() {
-      var listItem = document.querySelector(".ranking");
-      if (listItem) {
-        listItem.scrollTop = listItem.scrollHeight;
-      }
 
-      if (this.weather){
-        /*var s = document.createElement("script");
-        s.type = "text/javascript";
-        s.src = "https://www.tiempo.com/wid_loader/9cac11995ff674b308b4103845721c5b";
-        this.elementRef.nativeElement.appendChild(s);*/
-      }
+      // Pedir anuncios al servidor y guardarlos
+
+
     }
 
     private subscribeToChannel(location: string) {

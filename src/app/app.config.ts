@@ -36,11 +36,6 @@ export class AppConfig {
     return this.env[key];
   }
 
-  public getHost()
-  {
-    return 'http://' + this.getConfig('host');
-  }
-
   /**
    * This method:
    *   a) Loads "env.json" to get the current working environment (e.g.: 'production', 'development')

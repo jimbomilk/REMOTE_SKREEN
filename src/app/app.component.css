@@ -128,8 +128,24 @@ p.form-subtitle
     padding: 8px;
     border: 2px solid #fff;
     margin-right: 10px;
-
 }
+
+.video-container {
+  position:relative;
+  padding-top:30px;
+  padding-bottom: 38%;
+  height:0;
+  overflow:hidden;
+}
+
+.video-container iframe, .video-container object, .video-container embed {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+}
+
 
 .even{
     float: right;

@@ -1,0 +1,17 @@
+// Para cambiar el arranque tenemos que editar el fichero /etc/rc.local
+
+sudo nano /etc/rc.local
+
+// SECURITY RISK : debe ser modificado a no
+
+Se ha modificado PermitRootLogin a yes en /etc/ssh/sshd_config
+
+
+El directorio raiz de la aplicacion es REMOTE_SKREEN. Para crearlo:
+
+1. Se clona el directorio del GITHUB :
+git clone https://github.com/jimbomilk/REMOTE_SKREEN
+
+2. Se ejecuta npm install para crear el directorio node_modules y sus referencias
+
+3.
