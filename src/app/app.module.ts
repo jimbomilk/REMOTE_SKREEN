@@ -5,10 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent }     from './app.component';
-import { PageService }    from './services/page.service';
 import { AppConfig }       from './app.config';
 
-import { AuthenticationService } from './services/index';
 import { MessagesComponent } from "./messages.component";
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 
@@ -33,8 +31,6 @@ export function initConfig(config: AppConfig){
       useFactory: initConfig,
       deps: [AppConfig],
       multi: true },
-    AuthenticationService,
-    PageService,
     ],
 
   bootstrap: [AppComponent]

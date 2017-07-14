@@ -14,4 +14,7 @@ git clone https://github.com/jimbomilk/REMOTE_SKREEN
 
 2. Se ejecuta npm install para crear el directorio node_modules y sus referencias
 
-3.
+
+Para ejecutar la aplicacion en local: ng serve. Se ejucuta en el puerto 4200...asi es http://localhost:4200
+
+Para arrancar la aplicacion en la rasp se configura en etc/rc.local , MUY IMPORTANTE
