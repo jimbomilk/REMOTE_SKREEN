@@ -70,7 +70,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
           return './assets/images/'+this.screeny.logo2+'.jpg';
       }
       else{
-          return './assets/images/deporte.jpg';
+          return './assets/images/background.jpg';
       }
 
     }
