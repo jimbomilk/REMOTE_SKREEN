@@ -1,8 +1,4 @@
 {
-  "host_images": "http://192.168.1.136/api/images",
-  "user": "jmgarciacarrasco@gmail.com",
-  "pass": "secret",
   "location": "location1",
-  "screen": "4",
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json"
+  "screen": "4"
 }
