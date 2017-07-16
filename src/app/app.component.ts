@@ -27,7 +27,9 @@ export class AppComponent implements OnInit, AfterViewChecked {
     public textSize;
     public colClass="6";
     public showAds: boolean = false;
-    public showScreen: boolean = true;
+    public showScreen: boolean = false;
+    public showInfo: boolean = false;
+
     public typeOptions : boolean = false;
     public typeChart : boolean = false;
     public typeRanking : boolean = false;
@@ -103,6 +105,8 @@ export class AppComponent implements OnInit, AfterViewChecked {
         this.channel2.bind('App\\Events\\AdsEvent', (data) => {
           if (data.message.type == 'bigpack')
             this.newAds(data.message);
+          if (data.message.type == 'info')
+            this.newInfo(data.message);
         });
         this.subscribed = true;
       }
@@ -111,50 +115,57 @@ export class AppComponent implements OnInit, AfterViewChecked {
     private newAds(screen: Screen) {
         this.showScreen = false;
         this.showAds = true;
+        this.showInfo = false;
         this.screeny = screen;
         this.screeny.logo2= this.screeny.image;
         this.weather = true;
         this.qrcode = false;
     }
 
+    private newInfo(screen: Screen) {
+      this.showScreen = false;
+      this.showAds = false;
+      this.showInfo = true;
+      this.screeny = screen;
+      this.screeny.logo2= this.screeny.image;
+      this.screeny.headerMain = screen.stext;
+      this.weather = true;
+      this.qrcode = false;
+    }
+
     private newScreen(screen: Screen) {
+      this.typeChart = false;
+      this.typeRanking = false;
+      this.weather = false;
+      this.qrcode = true;
 
-        this.showScreen = true;
-        this.showAds = false;
-        this.screeny = screen;
-        this.typeOptions = false;
-        this.typeChart = false;
-        this.typeRanking = false;
-        this.weather = false;
-        this.qrcode = true;
+      // Elementos comunes
+      if (this.screeny.code!='')
+        this.gameId = this.screeny.code;
 
-        // Elementos comunes
-        if (this.screeny.code!='')
-          this.gameId = this.screeny.code;
-
-        // Vemos que tipo de pantalla es
-        if (this.screeny.type == 'options') {
-          this.typeOptions = true;
-          if (this.screeny.body) {
-            let options = JSON.parse(this.screeny.body);
-            this.textSize = 4;
-            if (this.textSize < 2)
-              this.textSize = 2;
-            this.textSize += 'em';
-            this.colClass = "6";
-            //this.colClass = (options.length>6 || options.length==0)?"4":""+(12/options.length);
-          }
+      // Vemos que tipo de pantalla es
+      if (this.screeny.type == 'options') {
+        this.typeOptions = true;
+        if (this.screeny.body) {
+          let options = JSON.parse(this.screeny.body);
+          this.textSize = 4;
+          if (this.textSize < 2)
+            this.textSize = 2;
+          this.textSize += 'em';
+          this.colClass = "6";
+          //this.colClass = (options.length>6 || options.length==0)?"4":""+(12/options.length);
         }
-        else if(this.screeny.type == 'chart'){
-          this.typeChart = true;
-          let values = JSON.parse(this.screeny.body);
-          this.columnChartOptions.dataTable = values.dataSeries.slice();
-          this.columnChartOptions.options.title = this.screeny.headerSub;
-        }
-        else if(this.screeny.type == 'ranking'){
-          let values = JSON.parse(this.screeny.body);
-          this.typeRanking = true;
-        }
+      }
+      else if(this.screeny.type == 'chart'){
+        this.typeChart = true;
+        let values = JSON.parse(this.screeny.body);
+        this.columnChartOptions.dataTable = values.dataSeries.slice();
+        this.columnChartOptions.options.title = this.screeny.headerSub;
+      }
+      else if(this.screeny.type == 'ranking'){
+        let values = JSON.parse(this.screeny.body);
+        this.typeRanking = true;
+      }
     }
 
 

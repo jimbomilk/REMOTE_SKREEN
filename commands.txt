@@ -18,3 +18,17 @@ git clone https://github.com/jimbomilk/REMOTE_SKREEN
 Para ejecutar la aplicacion en local: ng serve. Se ejucuta en el puerto 4200...asi es http://localhost:4200
 
 Para arrancar la aplicacion en la rasp se configura en etc/rc.local , MUY IMPORTANTE
+
+Para actualizar nuestro repositorio:
+git pull https://github.com/jimbomilk/REMOTE_SKREEN
+
+git config credential.helper store
+
+cd //home/pi/REMOTE_SKREEN
+git stash
+git pull https://github.com/jimbomilk/REMOTE_SKREEN
+
+sudo nano //etc/rc.local
+sudo -u git -C //home/pi/REMOTE_SKREEN  pull https://github.com/jimbomilk/REMOTE_SKREEN
+
+

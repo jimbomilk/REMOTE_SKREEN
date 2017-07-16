@@ -21,6 +21,16 @@
     <div id="fullscreen"  [ngStyle]= "{'background-image':'url(' + getBackImage() + ')'}">
 
 
+      <div *ngIf="showInfo" style="height: 100%">
+        <div class="row" style="width: 100%;height:10%;margin: 0px">
+          <div class="col-md-4"  >
+            <img  class="img-responsive"  src="{{screeny?.image}}">
+
+          </div>
+          <div  class="col-md-8 form-subtitle" [innerHtml]="screeny?.ltext"></div>
+        </div>
+
+      </div>
 
       <div *ngIf="showScreen" style="height: 100%">
         <div class="row" style="width: 100%;height:10%;margin: 0px">
