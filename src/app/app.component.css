@@ -114,7 +114,20 @@ p.form-title
     text-transform: uppercase;
     letter-spacing: 4px;
 }
+.imginfo
+{
+  border: 10px solid #fff;
+}
 
+.thanks
+{
+  font-size: 3em;
+}
+
+.colorido
+{
+  color: #ff0;
+}
 /*-- User Widget --*/
 #option-widget {
     background-color: transparent;

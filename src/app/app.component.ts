@@ -68,6 +68,8 @@ export class AppComponent implements OnInit, AfterViewChecked {
       if(this.screeny){
         if(this.showAds)
           return this.screeny.logo2;
+        else if(this.showInfo)
+          return './assets/images/bck'+this.getRandom(1,5)+'.jpg';
         else
           return './assets/images/'+this.screeny.logo2+'.jpg';
       }
@@ -75,6 +77,10 @@ export class AppComponent implements OnInit, AfterViewChecked {
           return './assets/images/background.jpg';
       }
 
+    }
+
+    public getRandom(min, max) {
+      return Math.random() * (max - min) + min;
     }
 
     public getbody(val)
@@ -127,7 +133,6 @@ export class AppComponent implements OnInit, AfterViewChecked {
       this.showAds = false;
       this.showInfo = true;
       this.screeny = screen;
-      this.screeny.logo2= this.screeny.image;
       this.screeny.headerMain = screen.stext;
       this.weather = true;
       this.qrcode = false;
