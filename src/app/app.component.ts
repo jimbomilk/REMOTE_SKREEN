@@ -117,7 +117,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
           if (data.message.type == 'info')
             this.newInfo(data.message);
 
-          this.getBackImage();
+          //this.getBackImage();
 
         });
 
