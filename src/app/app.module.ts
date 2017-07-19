@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppComponent }     from './app.component';
 import { AppConfig }       from './app.config';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { MessagesComponent } from "./messages.component";
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';

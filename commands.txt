@@ -32,3 +32,13 @@ sudo nano //etc/rc.local
 sudo -u git -C //home/pi/REMOTE_SKREEN  pull https://github.com/jimbomilk/REMOTE_SKREEN
 
 
+INSTRUCCIONES para resetear una RASPBERRY:
+
+1. borrar dir REMOTE_SKREEN : rm -r REMOTE_SKREEN
+2. crear dir REMOTE_SKREEN
+3. iniciar git : git init
+4. hacer pull del proyecto : git pull https://github.com/jimbomilk/REMOTE_SKREEN
+5. actualizar los node_module : npm update
+
+
+
