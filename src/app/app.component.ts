@@ -4,6 +4,7 @@ import { AppConfig } from './app.config';
 import { Screen } from './screen';
 import { MessagesComponent }  from './messages.component';
 
+
 declare var Pusher: any;
 
 @Component({
@@ -19,6 +20,9 @@ export class AppComponent implements OnInit, AfterViewChecked {
 
     public screens: Screen[];
     public screeny : Screen;
+    public backImg : string;
+    public transparent : string;
+    public col_mode : string;
     public gameId;
     private channel1;
     private channel2;
@@ -29,6 +33,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
     public showAds: boolean = false;
     public showScreen: boolean = false;
     public showInfo: boolean = false;
+
 
     public typeOptions : boolean = false;
     public typeChart : boolean = false;
@@ -65,22 +70,19 @@ export class AppComponent implements OnInit, AfterViewChecked {
 
     public getBackImage()
     {
-      if(this.screeny){
-        if(this.showAds)
-          return this.screeny.logo2;
-        else if(this.showInfo)
-          return './assets/images/bck'+this.getRandom(1,5)+'.jpg';
-        else
-          return './assets/images/'+this.screeny.logo2+'.jpg';
-      }
-      else{
-          return './assets/images/background.jpg';
-      }
+
+      if(this.showAds)
+        this.backImg =  this.screeny.logo2;
+      else if(this.showInfo)
+        this.backImg = './assets/images/bck' + this.getRandom(1, 5) + '.jpg';
+      else if(this.showScreen)
+        this.backImg =  './assets/images/'+this.screeny.logo2+'.jpg';
+
 
     }
 
     public getRandom(min, max) {
-      return Math.random() * (max - min) + min;
+      return Math.floor(Math.random()*(max-min+1)+min);
     }
 
     public getbody(val)
@@ -109,11 +111,16 @@ export class AppComponent implements OnInit, AfterViewChecked {
         });
         this.channel2 = this.pusher.subscribe(location);
         this.channel2.bind('App\\Events\\AdsEvent', (data) => {
+
           if (data.message.type == 'bigpack')
             this.newAds(data.message);
           if (data.message.type == 'info')
             this.newInfo(data.message);
+
+          this.getBackImage();
+
         });
+
         this.subscribed = true;
       }
     }
@@ -123,7 +130,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
         this.showAds = true;
         this.showInfo = false;
         this.screeny = screen;
-        this.screeny.logo2= this.screeny.image;
+        this.screeny.logo2= screen.image;
         this.weather = true;
         this.qrcode = false;
     }
@@ -139,36 +146,46 @@ export class AppComponent implements OnInit, AfterViewChecked {
     }
 
     private newScreen(screen: Screen) {
+      this.showScreen = true;
+      this.showAds = false;
+      this.showInfo = false;
       this.typeChart = false;
       this.typeRanking = false;
+      this.screeny= screen;
+      this.screeny.body = JSON.parse(screen.body);
       this.weather = false;
       this.qrcode = true;
+      if (screen.body.length<=4)
+        this.col_mode = "col-md-" + Math.floor(12/screen.body.length);
+      else
+        this.col_mode = "col-md-3";
 
       // Elementos comunes
-      if (this.screeny.code!='')
-        this.gameId = this.screeny.code;
+      if (screen.code!='')
+        this.gameId = screen.code;
 
       // Vemos que tipo de pantalla es
-      if (this.screeny.type == 'options') {
+      if (screen.type == 'options') {
         this.typeOptions = true;
-        if (this.screeny.body) {
-          let options = JSON.parse(this.screeny.body);
+        if (screen.body) {
+          let options = JSON.parse(screen.body);
           this.textSize = 4;
           if (this.textSize < 2)
             this.textSize = 2;
           this.textSize += 'em';
           this.colClass = "6";
           //this.colClass = (options.length>6 || options.length==0)?"4":""+(12/options.length);
+
         }
       }
-      else if(this.screeny.type == 'chart'){
+      else if(screen.type == 'chart'){
         this.typeChart = true;
-        let values = JSON.parse(this.screeny.body);
+        let values = JSON.parse(screen.body);
         this.columnChartOptions.dataTable = values.dataSeries.slice();
-        this.columnChartOptions.options.title = this.screeny.headerSub;
+        this.columnChartOptions.options.title = screen.headerSub;
       }
-      else if(this.screeny.type == 'ranking'){
-        let values = JSON.parse(this.screeny.body);
+      else if(screen.type == 'ranking'){
+        let values = JSON.parse(screen.body);
         this.typeRanking = true;
       }
     }
