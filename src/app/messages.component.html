@@ -6,8 +6,10 @@
 
           <li *ngFor="let message of messages" style="width: 22%;height: 100%; margin-top:0px;padding-top: 0;padding-right: 10px">
 
-            <div *ngIf="message.type == 'smallpack'" class="profile-card text-center message_image" style="height: 100%;width:100%;float: left" [ngStyle]="{'background-image': 'url(' + message?.image + ')'}">
-                <div class="profile-info">
+            <div *ngIf="message.type == 'smallpack'" class="profile-card text-center message_image" style="height: 100%;width:100%;float: left" [ngStyle]="{'background-image': 'url(' + message.image + ')'}">
+
+
+              <div class="profile-info">
 
                     <h2 >{{message?.stext}}<span>{{message?.ltext}}</span></h2>
 
@@ -15,13 +17,14 @@
             </div>
 
             <div *ngIf="message.type == 'message'" style="height: 100%;width: 100%;float: left">
-              <div class="block-text vertical-center">
+              <div class="block-text">
                 <a title="" href="#">¡Gracias por participar!</a>
 
               </div>
               <div class="person-text">
                 <img class="img-circle" src="{{(message.image)?message.image:'./assets/images/avatar.jpg'}}">
-                <i class="thanks"> <i class="colorido">{{message?.stext}}</i>  ha participado en {{message?.ltext}}</i>
+                <a title="" href="#">{{message?.stext}}</a>
+                <i> ha participado en : {{message?.ltext}}</i>
               </div>
             </div>
 

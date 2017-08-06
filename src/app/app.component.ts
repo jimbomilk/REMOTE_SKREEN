@@ -71,8 +71,10 @@ export class AppComponent implements OnInit, AfterViewChecked {
     public getBackImage()
     {
 
-      if(this.showAds)
-        this.backImg =  this.screeny.logo2;
+      if(this.showAds) {
+        this.backImg = this.screeny.logo2;
+        this.screeny.logo1= './assets/images/pu300x200.png';
+      }
       else if(this.showInfo)
         this.backImg = './assets/images/bck' + this.getRandom(1, 5) + '.jpg';
       else if(this.showScreen)
@@ -117,7 +119,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
           if (data.message.type == 'info')
             this.newInfo(data.message);
 
-          //this.getBackImage();
+          this.getBackImage();
 
         });
 
@@ -168,7 +170,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
       if (screen.type == 'options') {
         this.typeOptions = true;
         if (screen.body) {
-          let options = JSON.parse(screen.body);
+          //let options = JSON.parse(screen.body);
           this.textSize = 4;
           if (this.textSize < 2)
             this.textSize = 2;
