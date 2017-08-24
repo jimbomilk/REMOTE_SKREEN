@@ -33,6 +33,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
     public showAds: boolean = false;
     public showScreen: boolean = false;
     public showInfo: boolean = false;
+    public finalizado : boolean = false;
 
 
     public typeOptions : boolean = false;
@@ -47,7 +48,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
       chartType: 'ColumnChart',
       dataTable: [
         ['', '', ''],
-        ['', 1000, 400],
+        ['', 0, 0],
       ],
       options: {
         width: '100%',
@@ -147,7 +148,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
       this.qrcode = false;
     }
 
-    private newScreen(screen: Screen) {
+    private newScreen(screen: any) {
       this.showScreen = true;
       this.showAds = false;
       this.showInfo = false;
@@ -169,6 +170,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
       // Vemos que tipo de pantalla es
       if (screen.type == 'options') {
         this.typeOptions = true;
+        this.finalizado = screen.gameboard.status>=100;
         if (screen.body) {
           //let options = JSON.parse(screen.body);
           this.textSize = 4;
@@ -181,10 +183,11 @@ export class AppComponent implements OnInit, AfterViewChecked {
         }
       }
       else if(screen.type == 'chart'){
+        this.typeOptions = false;
         this.typeChart = true;
-        let values = JSON.parse(screen.body);
-        this.columnChartOptions.dataTable = values.dataSeries.slice();
-        this.columnChartOptions.options.title = screen.headerSub;
+        var values =JSON.parse(screen.stats);
+        this.columnChartOptions.dataTable = values['dataSeries'].slice();
+        this.columnChartOptions.options.title = "Número de Votos";
       }
       else if(screen.type == 'ranking'){
         let values = JSON.parse(screen.body);

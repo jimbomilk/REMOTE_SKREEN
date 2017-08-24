@@ -41,14 +41,13 @@
 
         </div>
         <!-- Options -->
-        <div *ngIf="typeOptions">
-
-
+        <div *ngIf="typeOptions" >
 
               <div *ngFor="let option of screeny?.body" style="text-align: center">
-                <div [className]='col_mode' style="position: relative;">
-                  <p class="option_desc">{{option.description}}</p>
+                <div [className]='col_mode' style="position: relative;height:260px">
+                  <p class="option_desc">{{option.description}}<span *ngIf="finalizado">-{{option.result}}</span></p>
                   <img width="300px" height="300px" [src]='option.image'>
+
                 </div>
 
               </div>
@@ -60,7 +59,7 @@
 
 
         <!-- Chart -->
-        <div *ngIf="typeChart" class="vertical-center">
+        <div *ngIf="typeChart" class="vertical-center" style="float: left;width: 100%">
 
           <google-chart [data]="columnChartOptions" style="width: 100%"></google-chart>
 
