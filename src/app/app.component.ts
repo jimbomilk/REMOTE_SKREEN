@@ -187,7 +187,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
         this.typeChart = true;
         var values =JSON.parse(screen.stats);
         this.columnChartOptions.dataTable = values['dataSeries'].slice();
-        this.columnChartOptions.options.title = "NÚMERO de VOTOS";
+        this.columnChartOptions.options.title = "DISTRIBUCIÓN de VOTOS";
       }
       else if(screen.type == 'ranking'){
         let values = JSON.parse(screen.body);
