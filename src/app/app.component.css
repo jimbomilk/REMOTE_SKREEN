@@ -120,16 +120,15 @@ p.form-title
 }
 .option_desc
 {
-  position:absolute;
+  position:relative;
   top:0px;
-  width:100%;
-  text-align:center;
   color:rgba(243,243,243,.8);
   font-family:Verdana;
   font-size:2.5em;
-  font-style: italic;
+  font-stretch: expanded;
+  font-weight: bold;
   background-color:rgba(0,0,0,.6);
-  padding:.1em 0;
+  padding:.1em 0 ;
 }
 
 .thanks
