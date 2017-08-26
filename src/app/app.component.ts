@@ -112,7 +112,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
         this.channel1.bind('App\\Events\\ScreenEvent', (data) => {
 
           this.newScreen(data.screen);
-          this.getBackImage();
+
         });
         this.channel2 = this.pusher.subscribe(location);
         this.channel2.bind('App\\Events\\AdsEvent', (data) => {
@@ -121,12 +121,13 @@ export class AppComponent implements OnInit, AfterViewChecked {
             this.newAds(data.message);
           if (data.message.type == 'info') {
             this.newInfo(data.message);
-            this.getBackImage();
-          }
 
+          }
+          this.getBackImage();
 
 
         });
+
 
 
         this.subscribed = true;

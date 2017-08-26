@@ -132,13 +132,13 @@
 <footer id="footer">
   <div class = "qr">
     <div *ngIf="qrcode" style="text-align: center">
-      <img class="img-responsive" src="./assets/images/qr.jpg" style="height: 80%;width: auto">
+      <img class="img-responsive" src="./assets/images/qr.png">
     </div>
 
     <div *ngIf="weather">
       <img src="https://www.tiempo.com/wimages/fotoc65ea85523152adabb3c095abd1a59f6.png" >
     </div>
-    <div class="location"> <span class="blink_me">Descarga la APP</span></div>
+    <div class="location"> <span class="blink_me">QR Descarga</span></div>
   </div>
   <messages [pusher]="pusher"></messages>
 </footer>
