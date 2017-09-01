@@ -73,7 +73,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
     {
 
       if(this.showAds) {
-        this.backImg = this.screeny.logo2;
+        //this.backImg = this.screeny.logo2;
         this.screeny.logo1= './assets/images/pu300x200.png';
       }
       else if(this.showInfo)
@@ -112,6 +112,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
         this.channel1.bind('App\\Events\\ScreenEvent', (data) => {
 
           this.newScreen(data.screen);
+          this.getBackImage();
 
         });
         this.channel2 = this.pusher.subscribe(location);
