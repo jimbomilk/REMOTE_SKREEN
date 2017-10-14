@@ -18,6 +18,8 @@ export class Screen {
     public gameboard_id: string;
     public logo1: string;
     public logo2:string;
+    public category:string;
+    public background:string;
     public headerMain:string;
     public headerSub:string;
     public body : string;

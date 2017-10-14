@@ -3,6 +3,7 @@ import {Component, OnInit, AfterViewChecked, ViewChild, ViewEncapsulation, Eleme
 import { AppConfig } from './app.config';
 import { Screen } from './screen';
 import { MessagesComponent }  from './messages.component';
+import {isDefined} from "@ng-bootstrap/ng-bootstrap/util/util";
 
 
 declare var Pusher: any;
@@ -76,10 +77,18 @@ export class AppComponent implements OnInit, AfterViewChecked {
         this.backImg = this.screeny.logo2;
         this.screeny.logo1= './assets/images/pu300x200.png';
       }
-      else if(this.showInfo)
-        this.backImg = './assets/images/bck' + this.getRandom(1, 5) + '.jpg';
-      else if(this.showScreen)
-        this.backImg =  './assets/images/'+this.screeny.logo2+'.jpg';
+      else if(this.showInfo) {
+        if (isDefined(this.screeny.background)&& this.screeny.background !== null && this.screeny.background !== "")
+          this.backImg = this.screeny.background;
+        else
+          this.backImg = './assets/images/bck' + this.getRandom(1, 5) + '.jpg';
+      }
+      else if(this.showScreen) {
+        if (isDefined(this.screeny.background)&& this.screeny.background !== null && this.screeny.background !== "")
+          this.backImg = this.screeny.background;
+        else
+          this.backImg = './assets/images/' + this.screeny.category + '.jpg';
+      }
 
 
     }
