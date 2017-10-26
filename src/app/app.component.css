@@ -362,4 +362,14 @@ p.form-title
     bottom: 0px;
   }
 
+
+  .background {
+    background-color: #000000;
+    opacity: 0.75;
+  }
+
+  .background text{
+    color: #FFFFFF;
+  }
+
 }

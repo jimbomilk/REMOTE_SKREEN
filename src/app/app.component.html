@@ -23,11 +23,13 @@
 
       <div *ngIf="showInfo" style="height: 100%;">
         <div class="row" style="width: 100%;height:10%;margin: 0px;">
-          <div class="col-md-4" style="padding-top: 60px" >
+          <div class="col-md-5" style="padding-top: 0px" >
             <img  class="img-responsive imginfo" width="100%"   src="{{screeny?.image}}">
 
           </div>
-          <div  class="col-md-8 form-subtitle" style="padding-top: 40px;" [innerHtml]="screeny?.ltext"></div>
+          <div  class="col-md-7 form-subtitle background" style="padding-top: 40px;" >
+            <div class="text" [innerHtml]="screeny?.ltext"></div>
+          </div>
         </div>
 
 

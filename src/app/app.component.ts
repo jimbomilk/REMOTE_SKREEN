@@ -127,13 +127,16 @@ export class AppComponent implements OnInit, AfterViewChecked {
         this.channel2 = this.pusher.subscribe(location);
         this.channel2.bind('App\\Events\\AdsEvent', (data) => {
 
-          if (data.message.type == 'bigpack')
+          if (data.message.type == 'bigpack') {
             this.newAds(data.message);
-          if (data.message.type == 'info') {
+            this.getBackImage();
+          }
+          else if (data.message.type == 'info') {
             this.newInfo(data.message);
+            this.getBackImage();
 
           }
-          this.getBackImage();
+
 
 
         });
