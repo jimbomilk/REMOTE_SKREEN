@@ -105,6 +105,8 @@ export class AppComponent implements OnInit, AfterViewChecked {
 
     public ngOnInit() {
         let location = this.config.getConfig('location');
+        if (!location || location == '')
+          location = 1;
         this.subscribeToChannel(location);
     }
 
