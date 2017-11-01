@@ -79,6 +79,7 @@ export class AppComponent implements AfterViewInit {
       else if(this.showInfo) {
         if (isDefined(this.screeny.background)&& this.screeny.background !== null && this.screeny.background !== "")
           this.backImg = this.screeny.background;
+        else this.backImg = '';
 
       }
       else if(this.showScreen) {
