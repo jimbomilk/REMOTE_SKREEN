@@ -16,7 +16,6 @@ declare var Pusher: any;
 
 export class AppComponent implements AfterViewInit {
 
-    @ViewChild(MessagesComponent)
     @ViewChild('dataContainer') dataContainer: ElementRef;
 
     public screens: Screen[];
@@ -27,10 +26,10 @@ export class AppComponent implements AfterViewInit {
     public gameId;
     private channel1;
     private channel2;
-    private subscribed;
     private pusher;
     public textSize;
     public colClass="6";
+    public isMessage: boolean = false;
     public showAds: boolean = false;
     public showScreen: boolean = false;
     public showInfo: boolean = true;
@@ -80,8 +79,7 @@ export class AppComponent implements AfterViewInit {
       else if(this.showInfo) {
         if (isDefined(this.screeny.background)&& this.screeny.background !== null && this.screeny.background !== "")
           this.backImg = this.screeny.background;
-        else
-          this.backImg = './assets/images/bck' + this.getRandom(1, 5) + '.jpg';
+
       }
       else if(this.showScreen) {
         if (isDefined(this.screeny.background)&& this.screeny.background !== null && this.screeny.background !== "")
@@ -89,8 +87,6 @@ export class AppComponent implements AfterViewInit {
         else
           this.backImg = './assets/images/' + this.screeny.category + '.jpg';
       }
-
-
     }
 
     private loadData(data) {
@@ -126,44 +122,37 @@ export class AppComponent implements AfterViewInit {
 
     public ngAfterViewChecked()
     {
-      if (this.showInfo && this.screeny)
+      if (this.showInfo && this.screeny && !this.isMessage)
       {
         this.loadData(this.screeny.ltext);
       }
 
     }
 
-
-
     private subscribeToChannel(location: string) {
       if (this.pusher) {
         this.channel1 = this.pusher.subscribe(location);
         this.channel1.bind('App\\Events\\ScreenEvent', (data) => {
-
           this.newScreen(data.screen);
           this.getBackImage();
-
+          this.isMessage = false;
         });
+
         this.channel2 = this.pusher.subscribe(location);
         this.channel2.bind('App\\Events\\AdsEvent', (data) => {
-
           if (data.message.type == 'bigpack') {
             this.newAds(data.message);
             this.getBackImage();
+            this.isMessage = false;
           }
           else if (data.message.type == 'info') {
             this.newInfo(data.message);
             this.getBackImage();
-
+            this.isMessage = false;
           }
-
-
-
+          else
+            this.isMessage = true;
         });
-
-
-
-        this.subscribed = true;
       }
     }
 
