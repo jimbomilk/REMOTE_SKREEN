@@ -1,5 +1,4 @@
-import {Component, OnInit, AfterViewChecked, ViewChild, ViewEncapsulation, ElementRef} from '@angular/core';
-
+import {Component, AfterViewInit, ViewChild, ViewEncapsulation, ElementRef, AfterContentChecked} from '@angular/core';
 import { AppConfig } from './app.config';
 import { Screen } from './screen';
 import { MessagesComponent }  from './messages.component';
@@ -15,9 +14,10 @@ declare var Pusher: any;
   encapsulation: ViewEncapsulation.None,
 })
 
-export class AppComponent implements OnInit, AfterViewChecked {
+export class AppComponent implements AfterViewInit,AfterContentChecked {
 
     @ViewChild(MessagesComponent)
+    @ViewChild('dataContainer') dataContainer: ElementRef;
 
     public screens: Screen[];
     public screeny : Screen;
@@ -33,7 +33,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
     public colClass="6";
     public showAds: boolean = false;
     public showScreen: boolean = false;
-    public showInfo: boolean = false;
+    public showInfo: boolean = true;
     public finalizado : boolean = false;
 
 
@@ -93,6 +93,10 @@ export class AppComponent implements OnInit, AfterViewChecked {
 
     }
 
+    private loadData(data) {
+      this.dataContainer.nativeElement.innerHTML = data;
+    }
+
     public getRandom(min, max) {
       return Math.floor(Math.random()*(max-min+1)+min);
     }
@@ -103,7 +107,8 @@ export class AppComponent implements OnInit, AfterViewChecked {
         return JSON.parse(val);
     }
 
-    public ngOnInit() {
+
+    public ngAfterViewInit() {
       let location = 'location1';
       if (this.config.config != null) {
         location = this.config.getConfig('location');
@@ -112,14 +117,23 @@ export class AppComponent implements OnInit, AfterViewChecked {
       }
 
       this.subscribeToChannel(location);
+      this.loadData("");
+      this.showAds = false;
+      this.showScreen = false;
+      this.showInfo = false;
     }
 
-    public ngAfterViewChecked() {
 
-      // Pedir anuncios al servidor y guardarlos
-
+    public ngAfterViewChecked()
+    {
+      if (this.showInfo && this.screeny)
+      {
+        this.loadData(this.screeny.ltext);
+      }
 
     }
+
+
 
     private subscribeToChannel(location: string) {
       if (this.pusher) {
@@ -169,6 +183,8 @@ export class AppComponent implements OnInit, AfterViewChecked {
       this.showInfo = true;
       this.screeny = screen;
       this.screeny.headerMain = screen.stext;
+
+
       this.weather = true;
       this.qrcode = false;
     }
