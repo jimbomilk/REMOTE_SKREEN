@@ -23,6 +23,8 @@ export class MessagesComponent implements OnInit {
 
   getMessages(): void {
     let location = this.config.getConfig('location');
+    if (!location || location == '')
+      location = 'location1';
     this.channel1 = this.pusher.subscribe(location);
     this.channel1.bind('App\\Events\\MessageEvent', (data) => {
       this.newMessage(data.message);
