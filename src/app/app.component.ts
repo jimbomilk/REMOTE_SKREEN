@@ -75,7 +75,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
 
       if(this.showAds) {
         this.backImg = this.screeny.logo2;
-        this.screeny.logo1= './assets/images/pu300x200.png';
+        //this.screeny.logo1= './assets/images/pu300x200.png';
       }
       else if(this.showInfo) {
         if (isDefined(this.screeny.background)&& this.screeny.background !== null && this.screeny.background !== "")
