@@ -22,16 +22,13 @@
 
       <div *ngIf="showInfo" style="height: 100%;">
         <div class="row" style="width: 99%;height:10%;margin: 0px;">
-          <div class="col-md-5" style="padding-top: 20px" >
-            <img  class="img-responsive imginfo" width="100%"   src="{{screeny?.image}}">
-
+          <div class="col-md-5" [ngStyle] = "{'padding-top':'20px','display': + screeny?.image?'block':'none'}" >
+            <img  class="img-responsive imginfo" width="100%" src="{{screeny?.image}}">
           </div>
-          <div  class="col-md-7 background" style="margin-top: 20px;" >
+          <div  [ngClass]="[screeny?.image?'col-md-7':'col-md-12','background']" style="margin-top: 20px;   " >
             <div style="color: #FFFFFF"><div #dataContainer></div></div>
           </div>
         </div>
-
-
       </div>
 
       <div *ngIf="showScreen" style="height: 100%">
