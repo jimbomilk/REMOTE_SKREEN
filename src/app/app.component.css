@@ -373,7 +373,7 @@ p.form-title
 
   .text_msg{
     color: #fff;
-    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-width: 2px;
     -webkit-text-stroke-color: #000;
   }
 }
