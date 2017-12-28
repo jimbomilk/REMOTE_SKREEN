@@ -9,7 +9,7 @@ declare var Pusher: any;
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
+  templateUrl: './app.skreen.html',
   styleUrls: ['./app.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
