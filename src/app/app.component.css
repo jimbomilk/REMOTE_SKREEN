@@ -372,8 +372,8 @@ p.form-title
   }
 
   .text_msg{
-    color: #000;
+    color: #fff;
     -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: #fff;
+    -webkit-text-stroke-color: #222;
   }
 }
