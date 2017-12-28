@@ -15,7 +15,7 @@ export class keepAliveService {
 
   keepAlive(location: string): Observable<boolean> {
     return this.http
-      .get(this.appConfig.getAPIUrl() + `keepAlive?locationId=${location}&screenId=1`)
+      .get(this.appConfig.getAPIUrl() + `keepAlive?locationId=${location}&screenId=`+this.appConfig.getEnv('ip'))
       .map( res => {
         return true;
       });
