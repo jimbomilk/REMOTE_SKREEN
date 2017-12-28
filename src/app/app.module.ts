@@ -8,6 +8,7 @@ import { AppConfig }       from './app.config';
 
 import { MessagesComponent } from "./messages.component";
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
+import {keepAliveService} from "../services/keepAliveService";
 
 export function initConfig(config: AppConfig){
   return () => config.load()
@@ -29,10 +30,11 @@ export function initConfig(config: AppConfig){
    ],
   providers: [
     AppConfig,
+    keepAliveService,
     { provide: APP_INITIALIZER,
       useFactory: initConfig,
       deps: [AppConfig],
-      multi: true },
+      multi: true }
     ],
 
   bootstrap: [AppComponent]

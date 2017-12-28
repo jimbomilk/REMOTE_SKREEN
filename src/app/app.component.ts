@@ -3,6 +3,7 @@ import { AppConfig } from './app.config';
 import { Screen } from './screen';
 import { MessagesComponent }  from './messages.component';
 import {isDefined} from "@ng-bootstrap/ng-bootstrap/util/util";
+import {keepAliveService} from "../services/keepAliveService";
 
 
 declare var Pusher: any;
@@ -42,6 +43,7 @@ export class AppComponent implements AfterViewInit {
     public qrcode: boolean = false ;
     public weather : boolean = true;
     public isVideo : boolean = false;
+    private interval: any;
     //public host;
 
     public columnChartOptions:any =  {
@@ -61,7 +63,8 @@ export class AppComponent implements AfterViewInit {
         title: 'Participation'}
     };
 
-    constructor(private config: AppConfig,private elementRef:ElementRef)
+
+    constructor(private config: AppConfig,private elementRef:ElementRef,private keepAliveServ:keepAliveService)
     {
         this.pusher = new Pusher('9931344a99d006ebf67d', {
           cluster: 'eu'
@@ -103,6 +106,7 @@ export class AppComponent implements AfterViewInit {
       if (val)
         return JSON.parse(val);
     }
+
 
 
     public ngAfterViewInit() {
@@ -227,6 +231,26 @@ export class AppComponent implements AfterViewInit {
     }
 
 
+    private keepAlive() {
+      this.keepAliveServ.keepAlive(this.config.getConfig('location'))
+        .subscribe(res => {
+            //console.log(res, "Response here");
+          },
+          err => {
+            //console.log(err);
+          })
+    }
 
+    ngOnInit(){
+      this.interval = setInterval(() => {
+        this.keepAlive();
+      }, 30000);
+    }
+
+    ngOnDestroy() {
+      if (this.interval) {
+        clearInterval(this.interval);
+      }
+    }
 }
 

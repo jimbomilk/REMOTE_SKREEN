@@ -36,6 +36,17 @@ export class AppConfig {
     return this.env[key];
   }
 
+  public getAPIUrl()
+  {
+    return "https://addmeetoo.com/api/";
+  }
+
+  public getIP()
+  {
+
+    return this.getEnv('ip');
+  }
+
   /**
    * This method:
    *   a) Loads "env.json" to get the current working environment (e.g.: 'production', 'development')
