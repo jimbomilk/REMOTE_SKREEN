@@ -1,7 +1,6 @@
 import {Component, AfterViewInit, ViewChild, ViewEncapsulation, ElementRef} from '@angular/core';
 import { AppConfig } from './app.config';
 import { Screen } from './screen';
-import { MessagesComponent }  from './messages.component';
 import {isDefined} from "@ng-bootstrap/ng-bootstrap/util/util";
 import {keepAliveService} from "../services/keepAliveService";
 
