@@ -52,9 +52,9 @@ export class AppConfig {
    *   a) Loads "env.json" to get the current working environment (e.g.: 'production', 'development')
    *   b) Loads "config.[env].json" to get all env's variables (e.g.: 'config.development.json')
    */
-  public load() {
+  /*public load() {
     return new Promise((resolve, reject) => {
-      this.http.request('./assets/env.json').map( res => res.json() ).catch((error: any):any => {
+      this.http.get('./assets/env.json').map( res => res.json() ).catch((error: any):any => {
         console.log('Configuration file "env.json" could not be read');
         resolve(true);
         return Observable.throw(error.json().error || 'Server error');
@@ -95,6 +95,26 @@ export class AppConfig {
         }
       });
 
+    });
+  }*/
+
+
+  public load() {
+    return new Promise((resolve, reject) => {
+      this.http.get('./assets/env.json')
+      .map(res => res.json())
+        .subscribe((env_data) => {
+          this.http.get('./assets/config.' + env_data.env + '.json')
+          .map(res => res.json())
+            .catch((error: any) => {
+              console.error(error);
+              return Observable.throw(error.json().error || 'Server error');
+            })
+            .subscribe((data) => {
+              this.config = data;
+              resolve(true);
+            });
+        });
     });
   }
 }
