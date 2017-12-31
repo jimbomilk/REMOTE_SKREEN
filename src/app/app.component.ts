@@ -192,7 +192,7 @@ export class AppComponent implements AfterViewInit {
       this.screeny.body = JSON.parse(screen.body);
       this.weather = false;
       this.qrcode = true;
-      if (screen.body.length<=4)
+      if (screen.body && screen.body.length<=4)
         this.col_mode = "col-md-" + Math.floor(12/screen.body.length);
       else
         this.col_mode = "col-md-3";

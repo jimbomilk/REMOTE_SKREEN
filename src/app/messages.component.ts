@@ -45,7 +45,7 @@ export class MessagesComponent implements OnInit {
 
   private newMessage(received: Screen) {
     this.messages.push(received);
-    if (this.messages.length>4)
+    if (this.messages && this.messages.length>4)
     {
       this.messages.shift();
     }
