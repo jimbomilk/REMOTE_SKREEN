@@ -43,6 +43,7 @@ export class AppComponent implements AfterViewInit {
     public weather : boolean = true;
     public isVideo : boolean = false;
     private interval: any;
+
     //public host;
 
     public columnChartOptions:any =  {
@@ -109,14 +110,16 @@ export class AppComponent implements AfterViewInit {
 
 
     public ngAfterViewInit() {
-      let location = 'location1';
-      if (this.config.config != null) {
-        location = this.config.getConfig('location');
-        if (!location || location == '')
-          location = 'location1';
-      }
 
+
+
+      let location = 'location1';
+      if (this.config.location!=null)
+        location = this.config.location;
       this.subscribeToChannel(location);
+
+
+
       this.loadData("");
       this.showAds = false;
       this.showScreen = false;
@@ -231,7 +234,7 @@ export class AppComponent implements AfterViewInit {
 
 
     private keepAlive() {
-      this.keepAliveServ.keepAlive(this.config.getConfig('location'))
+      this.keepAliveServ.keepAlive(this.config.location,this.config.ip)
         .subscribe(res => {
             //console.log(res, "Response here");
           },

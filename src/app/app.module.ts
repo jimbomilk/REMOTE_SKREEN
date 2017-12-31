@@ -26,11 +26,7 @@ import {keepAliveService} from "../services/keepAliveService";
    ],
   providers: [
     AppConfig,
-    keepAliveService,
-    { provide: APP_INITIALIZER,
-      useFactory: (config: AppConfig) => () => config.load(),
-      deps: [AppConfig],
-      multi: true }
+    keepAliveService
     ],
 
   bootstrap: [AppComponent]

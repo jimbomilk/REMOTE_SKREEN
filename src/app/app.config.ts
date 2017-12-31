@@ -2,50 +2,33 @@
  * Created by jimbomilk on 2/10/2017.
  */
 import { Inject, Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+
 import { Observable } from 'rxjs/Rx';
-
-
-class EnvData {
-  env: string;
-}
-
+import {HttpClient} from "@angular/common/http";
+import * as dd from '../assets/config.production.json';
 
 
 @Injectable()
 export class AppConfig {
+  public config: any;
+  public location = 'location1';
+  public ip = '';
 
-  public config: Object = null;
-  private env:    Object = null;
 
-  constructor(private http: Http) {
-
+  constructor() {
+    this.config = dd;
+    if (this.config.location)
+      this.location = this.config.location;
+    if (this.config.ip)
+      this.ip = this.config.ip;
   }
 
-  /**
-   * Use to get the data found in the second file (config file)
-   */
-  public getConfig(key: any) {
-    return this.config[key];
-  }
-
-  /**
-   * Use to get the data found in the first file (env file)
-   */
-  public getEnv(key: any) {
-    return this.env[key];
-  }
 
   public getAPIUrl()
   {
     return "https://addmeetoo.com/api/";
   }
 
-  public getIP()
-  {
-
-    return this.getEnv('ip');
-  }
 
   /**
    * This method:
@@ -99,22 +82,5 @@ export class AppConfig {
   }*/
 
 
-  public load() {
-    /*return new Promise((resolve, reject) => {
-      this.http.get('./assets/env.json')
-      .map(res => res.json())
-        .subscribe((env_data) => {
-          this.http.get('./assets/config.' + env_data.env + '.json')
-          .map(res => res.json())
-            .catch((error: any) => {
-              console.error(error);
-              return Observable.throw(error.json().error || 'Server error');
-            })
-            .subscribe((data) => {
-              this.config = data;
-              resolve(true);
-            });
-        });
-    });*/
-  }
+
 }

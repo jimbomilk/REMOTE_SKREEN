@@ -16,25 +16,20 @@ export class MessagesComponent implements OnInit {
   private channel1;
   private channel2;
   private subscribed;
+  private location;
   @Input() pusher;
 
   constructor(private config: AppConfig ) {
   }
 
   getMessages(): void {
-    let location = 'location1';
-    if (this.config.config != null) {
-      location = this.config.getConfig('location');
-      if (!location || location == '')
-        location = 'location1';
-    }
 
-    this.channel1 = this.pusher.subscribe(location);
+    this.channel1 = this.pusher.subscribe(this.location);
     this.channel1.bind('App\\Events\\MessageEvent', (data) => {
       this.newMessage(data.message);
     });
 
-    this.channel2 = this.pusher.subscribe(location);
+    this.channel2 = this.pusher.subscribe(this.location);
     this.channel2.bind('App\\Events\\AdsEvent', (data) => {
       if (data.message.type =='smallpack')
         this.newMessage(data.message);
@@ -52,6 +47,13 @@ export class MessagesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+
+      this.location = 'location1';
+      if (this.config.location!='')
+        this.location = this.config.location;
+
+
     this.getMessages();
     this.messages=[];
   }
