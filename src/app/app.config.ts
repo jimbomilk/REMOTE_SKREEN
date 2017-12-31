@@ -100,7 +100,7 @@ export class AppConfig {
 
 
   public load() {
-    return new Promise((resolve, reject) => {
+    /*return new Promise((resolve, reject) => {
       this.http.get('./assets/env.json')
       .map(res => res.json())
         .subscribe((env_data) => {
@@ -115,6 +115,6 @@ export class AppConfig {
               resolve(true);
             });
         });
-    });
+    });*/
   }
 }
