@@ -71,7 +71,7 @@ export class AppComponent implements AfterViewInit {
           cluster: 'eu'
         });
         //this.host = this.config.getConfig('host_images');
-      this.logo_addmeetoo = './src/assets/images/logo_modern_big_white.png';
+
     }
 
     public getBackImage()
@@ -113,7 +113,7 @@ export class AppComponent implements AfterViewInit {
 
     public ngAfterViewInit() {
 
-
+      this.logo_addmeetoo = './assets/images/logo_modern_big_white.png';
 
       let location = 'location1';
       if (this.config.location!=null)
