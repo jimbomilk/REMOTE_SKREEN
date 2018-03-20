@@ -41,4 +41,7 @@ INSTRUCCIONES para resetear una RASPBERRY:
 5. actualizar los node_module : npm update
 
 
+Start app
+ng serve
+
 
