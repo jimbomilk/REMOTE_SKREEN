@@ -43,6 +43,7 @@ export class AppComponent implements AfterViewInit {
     public weather : boolean = true;
     public isVideo : boolean = false;
     private interval: any;
+    public logo_addmeetoo: any;
 
     //public host;
 
@@ -70,6 +71,7 @@ export class AppComponent implements AfterViewInit {
           cluster: 'eu'
         });
         //this.host = this.config.getConfig('host_images');
+      this.logo_addmeetoo = './assets/images/logo_modern_big_white.png';
     }
 
     public getBackImage()
