@@ -71,6 +71,7 @@ export class AppComponent implements AfterViewInit {
           cluster: 'eu'
         });
         //this.host = this.config.getConfig('host_images');
+      this.logo_addmeetoo = './assets/images/logo_modern_big_white.png';
 
     }
 
@@ -79,7 +80,7 @@ export class AppComponent implements AfterViewInit {
 
       if(this.showAds) {
         this.backImg = this.screeny.logo2;
-        //this.screeny.logo1= './assets/images/pu300x200.png';
+        //this.logo_addmeetoo= this.screeny.logo1;
       }
       else if(this.showInfo) {
         if (isDefined(this.screeny.background)&& this.screeny.background !== null && this.screeny.background !== "")
@@ -112,8 +113,6 @@ export class AppComponent implements AfterViewInit {
 
 
     public ngAfterViewInit() {
-
-      this.logo_addmeetoo = './assets/images/logo_modern_big_white.png';
 
       let location = 'location1';
       if (this.config.location!=null)
