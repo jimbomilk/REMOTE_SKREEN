@@ -3,7 +3,7 @@
   <div class="header">
     <div class="row" >
       <div class="col-md-2">
-          <img class="img-responsive" width="100%" style="padding-top: 30px" [src]="logo_addmeetoo" alt="Addmeetoo logo">
+
       </div>
 
       <div class="col-md-8" >
@@ -123,14 +123,12 @@
 
 <footer id="footer">
   <div class = "qr">
-    <div *ngIf="qrcode" style="text-align: center">
-      <img class="img-responsive" src="./assets/images/qr.png">
-    </div>
 
-    <div *ngIf="weather">
+
+    <div >
       <img src="https://www.tiempo.com/wimages/fotoc65ea85523152adabb3c095abd1a59f6.png" >
     </div>
-    <div class="location"> <span class="blink_me">QR Descarga</span></div>
+
   </div>
   <messages [pusher]="pusher"></messages>
 </footer>
